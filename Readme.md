@@ -1,3 +1,9 @@
+Meu Front
+Este projeto contém o frontend do projeto Quiz App.
+
+Como executar
+Basta fazer o download do projeto e abrir o arquivo index.html no seu browser.
+
 # MVP-PUCRJ
 Sistema de controle de registro de quiz de perguntas. 
 
