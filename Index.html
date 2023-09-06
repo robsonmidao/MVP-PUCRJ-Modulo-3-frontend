@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <title>Quiz App</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+<div class="app-wrapper">
+
+    <div id="login-container" class="centered">
+        <h2>Login</h2>
+        <div class="form-group">
+            <label for="login-email">Email:</label>
+            <input type="email" id="login-email" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="login-password">Password:</label>
+            <input type="password" id="login-password" class="form-control">
+        </div>
+        <button id="login-btn" class="btn btn-primary">Login</button>
+        <button id="show-register" class="btn btn-secondary">Register</button>
+    </div>
+    <nav class="navbar navbar-expand-lg custom-navbar" style="display: none;" id="main-navbar">
+        <a class="navbar-brand" href="#">Quiz App</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#" id="nav-quiz"><i class="fas fa-question-circle"></i> Quiz</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" id="nav-users"><i class="fas fa-users"></i> Usuários</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" id="nav-history"><i class="fas fa-history"></i> Histórico</a>
+            </li>
+          </ul>
+          <button id="logout-btn" class="btn btn-danger"><i class="fas fa-sign-out-alt"></i> Logout</button>
+        </div>
+    </nav>
+    
+    <div id="register-container" class="centered" style="display: none;">
+        <h2>Register</h2>
+        <div class="form-group">
+            <label for="register-name">Nome:</label>
+            <input type="text" id="register-name" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="register-email">Email:</label>
+            <input type="email" id="register-email" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="register-password">Password:</label>
+            <input type="password" id="register-password" class="form-control">
+        </div>
+        <button id="register-btn" class="btn btn-primary">Register</button>
+        <button id="show-login" class="btn btn-secondary">Back to Login</button>
+    </div>
+
+
+    
+    <div id="start-quiz-container" class="centered" style="display: none;">
+        <h3>Welcome, <span id="user-name"></span><span id="user-id" style="display:none"></span></h3>
+        <div class="form-group">
+            <label for="trivia_category">Choose a category:</label>
+            <select name="trivia_category" class="form-control">
+                <option value="9">General Knowledge</option>
+                <option value="10">Entertainment: Books</option>
+                <option value="11">Entertainment: Film</option>
+                <option value="12">Entertainment: Music</option>
+                <option value="13">Entertainment: Musicals &amp; Theatres</option>
+                <option value="14">Entertainment: Television</option>
+                <option value="15">Entertainment: Video Games</option>
+                <option value="16">Entertainment: Board Games</option>
+                <option value="17">Science &amp; Nature</option>
+                <option value="18">Science: Computers</option>
+                <option value="19">Science: Mathematics</option>
+                <option value="20">Mythology</option>
+                <option value="21">Sports</option>
+                <option value="22">Geography</option>
+                <option value="23">History</option>
+                <option value="24">Politics</option>
+                <option value="25">Art</option>
+                <option value="26">Celebrities</option>
+                <option value="27">Animals</option>
+                <option value="28">Vehicles</option>
+                <option value="29">Entertainment: Comics</option>
+                <option value="30">Science: Gadgets</option>
+                <option value="31">Entertainment: Japanese Anime &amp; Manga</option>
+                <option value="32">Entertainment: Cartoon &amp; Animations</option>
+                <option value="32">Entertainment: Cartoon &amp; Animations</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="num_questions">Number of Questions:</label>
+            <input type="number" name="num_questions" class="form-control" value="5" min="1" max="50">
+        </div>
+        <div id="error-message" style="color: red;"></div>
+        <button id="start-quiz-btn" class="btn btn-primary">Start Quiz</button>
+    </div>
+
+    <div class="quiz-container centered" style="display: none;">
+        <h2 id="question-title"></h2>
+        <div id="options-container"></div>
+
+        <div class="progress" style="margin-top: 20px;">
+            <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="scoreProgressBar"></div>
+        </div>
+        <p id="scoreText" style="margin-top: 10px;"></p>
+
+        <div class="navigation-buttons" style="margin-top: 20px;">
+            <button id="prev-button" class="btn btn-light">Previous</button>
+            <button id="next-button" class="btn btn-light">Next</button>
+        </div>
+    </div>
+
+    <!-- Modal for showing the final score -->
+    <div class="modal fade" id="scoreModal" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="modalBody"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="restart-quiz-btn">Restart Quiz</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="users-control-container" class="centered" style="display: none;">
+        <h3>Controle de Usuários</h3>
+    
+        <table class="table table-dark" id="usuariosTable">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col" class="email-column">Email</th>
+                    <th scope="col" class="acoes-column">Ações</th>
+                </tr>
+            </thead>
+            <tbody id="users-table">
+                <!-- O JavaScript irá popular essa tabela -->
+            </tbody>
+        </table>
+    
+        <!-- Modal para edição de usuário -->
+        <div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editUserModalLabel">Editar Usuário</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="edit-user-name">Nome:</label>
+                            <input type="text" id="edit-user-name" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-user-email">Email:</label>
+                            <input type="email" id="edit-user-email" class="form-control" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-user-password">Password:</label>
+                            <input type="password" id="edit-user-password" class="form-control">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-primary" id="save-changes-btn">Salvar Mudanças</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="history-container" class="centered" style="display: none;">
+        <h3>Histórico</h3>
+        <div class="filter-options">
+            <select id="filter-type" class="form-control">
+                <option value="user">Por Usuário</option>
+                <option value="category">Por Categoria</option>
+            </select>
+            <select name="trivia_category_report" id="trivia_category_report" class="form-control">
+                <option value="9">General Knowledge</option>
+                <option value="10">Entertainment: Books</option>
+                <option value="11">Entertainment: Film</option>
+                <option value="12">Entertainment: Music</option>
+                <option value="13">Entertainment: Musicals &amp; Theatres</option>
+                <option value="14">Entertainment: Television</option>
+                <option value="15">Entertainment: Video Games</option>
+                <option value="16">Entertainment: Board Games</option>
+                <option value="17">Science &amp; Nature</option>
+                <option value="18">Science: Computers</option>
+                <option value="19">Science: Mathematics</option>
+                <option value="20">Mythology</option>
+                <option value="21">Sports</option>
+                <option value="22">Geography</option>
+                <option value="23">History</option>
+                <option value="24">Politics</option>
+                <option value="25">Art</option>
+                <option value="26">Celebrities</option>
+                <option value="27">Animals</option>
+                <option value="28">Vehicles</option>
+                <option value="29">Entertainment: Comics</option>
+                <option value="30">Science: Gadgets</option>
+                <option value="31">Entertainment: Japanese Anime &amp; Manga</option>
+                <option value="32">Entertainment: Cartoon &amp; Animations</option>
+                <option value="32">Entertainment: Cartoon &amp; Animations</option>
+            </select>
+            <input type="text" id="filter-value" class="form-control" placeholder="Digite o nome do usuário ou a categoria">
+            <button id="filter-btn" class="btn btn-primary">Filtrar</button>
+        </div>
+    
+        <table class="table table-dark mt-3">
+            <thead id="history-head">
+                <!-- Será preenchido com JavaScript -->
+            </thead>
+            <tbody id="history-table">
+                <!-- Será preenchido com JavaScript -->
+            </tbody>
+        </table>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
+</div> <!-- fim de .app-wrapper -->
+</body>
+</html>

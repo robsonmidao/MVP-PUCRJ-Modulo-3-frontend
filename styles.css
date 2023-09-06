@@ -1,0 +1,195 @@
+body {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #121212;
+    color: #FFFFFF;
+    background-image: url('img/Background.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.card {
+    background-color: #1f1f1f;
+    border-color: #333;
+}
+
+.card-header {
+    border-bottom-color: #333;
+}
+
+.form-control, .btn {
+    border-color: #555;
+    background-color: #2a2a2a;
+    color: #fff;
+}
+
+.form-control:focus, .btn:focus {
+    box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.25);
+}
+
+.btn-primary {
+    background-color: #007BFF;
+    border-color: #0056b3;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #003f7f;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    border-color: #545b62;
+}
+
+.btn-secondary:hover {
+    background-color: #545b62;
+    border-color: #3e4248;
+}
+
+.option {
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.option:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+input[type="radio"]:checked {
+    background-color: #FFD700;
+    transform: scale(1.5);
+    border-radius: 50%;
+    box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.5);
+}
+
+input[type="radio"] {
+    color: initial;
+}
+
+.centered {
+    width: 70%;
+    max-width: 800px; 
+    background-color: #1f1f1f;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.1);
+    margin-top: 2rem; 
+}
+
+.quiz-container {
+    width: 70%;
+    max-width: 600px;
+    background-color: #1f1f1f;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.1);
+}
+
+.navigation-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #007BFF;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.modal-content {
+    background-color: #1f1f1f;
+    color: #FFFFFF;
+}
+
+.modal-header, .modal-footer {
+    border-color: #333;
+}
+
+.btn-close {
+    color: #FFFFFF;
+}
+
+.modal-body {
+    font-size: 20px;
+}
+
+.app-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.custom-navbar {
+    background: linear-gradient(90deg, #1f1f1f, #2a2a2a);
+    padding: 15px 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+.navbar .nav-item .nav-link {
+    margin-right: 15px;
+    transition: color 0.3s;
+}
+
+.navbar .nav-item .nav-link:hover {
+    color: #FFD700;  
+}
+
+.navbar-toggler {
+    border-color: #555;
+}
+
+.navbar-toggler-icon {
+    background-color: #fff;
+}
+
+.navbar .navbar-brand {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.navbar {
+    border-radius: 10px;
+}
+
+#users-table {
+    width: 100%;
+}
+
+.actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.actions button {
+    margin: 0;
+    padding: 5px 10px; 
+}
+.email-column {
+    width: 40%; 
+}
+.acoes-column {
+    width: 100px; 
+}
+#history-container .filter-options {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
