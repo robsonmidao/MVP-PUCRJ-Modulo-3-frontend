@@ -364,7 +364,7 @@ function displayHistories(data, type) {
     } else if (type === 'user') {    
         tableBody.innerHTML = `
         <tr>
-            <th>Usuário</th>
+            <th>Categoria</th>
             <th>Score</th>
             <th>Data</th>
         </tr>
