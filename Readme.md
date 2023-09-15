@@ -13,13 +13,13 @@ Navegue até o diretório que contém o Dockerfile no terminal.
 Execute **como administrador** o seguinte comando para construir a imagem Docker:
 
 ```
-$ docker build -t front-store .
+$ docker build -t front-quiz .
 ```
 
 Uma vez criada a imagem, para executar o container basta executar, **como administrador**, o seguinte comando:
 
 ```
-$ sudo docker run --rm -p 8080:80 front-store
+$ sudo docker run --rm -p 8080:80 front-quiz
 ```
 
 Uma vez executando, para acessar o front-end, basta abrir o [http://localhost:8080/#/](http://localhost:8080/#/) no navegador.
