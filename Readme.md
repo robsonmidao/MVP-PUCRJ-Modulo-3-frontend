@@ -25,12 +25,23 @@ $ sudo docker run --rm -p 8080:80 front-quiz
 Uma vez executando, para acessar o front-end, basta abrir o [http://localhost:8080/#/](http://localhost:8080/#/) no navegador.
 
 
-# API Externa: 
+# API Externa #1: 
 https://opentdb.com/api_config.php
 
-# Descrição: API de curiosidades
+# Descrição: API de curiosidades:
 O Open Trivia Database fornece uma API JSON totalmente gratuita para uso em projetos de programação. O uso desta API não requer uma chave de API, apenas gere a URL abaixo e use-a em seu próprio aplicativo para recuperar perguntas triviais.
 Todos os dados fornecidos pela API estão disponíveis sob a Licença Internacional Creative Commons Attribution-ShareAlike 4.0
 
 # Rotas Utilizadas: 
 https://opentdb.com/api.php?amount=${amount}&category=${category}
+
+
+
+# API Externa #2: 
+https://viacep.com.br/
+
+# Descrição: API de CEP:
+VIACEP é um webservice gratuito e de alto desempenho para consultar Códigos de Endereçamento Postal (CEP) do Brasil. O uso desta API não requer uma chave de API.
+
+# Rotas Utilizadas: 
+https://viacep.com.br/ws/${cepValue}/json/

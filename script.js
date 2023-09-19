@@ -17,6 +17,11 @@ const scoreProgressBar = document.getElementById('scoreProgressBar');
 const scoreText = document.getElementById('scoreText');
 const userNameElement = document.getElementById('user-name');
 const userIdElement = document.getElementById('user-id');
+const cepField = document.getElementById('register-cep');
+const logradouroField = document.getElementById('register-logradouro');
+const bairroField = document.getElementById('register-bairro');
+const cidadeField = document.getElementById('register-cidade');
+const estadoField = document.getElementById('register-estado');
 
 // Event listener for Login
 document.getElementById('login-btn').addEventListener('click', function() {
@@ -71,7 +76,7 @@ function loadUsers() {
         const tableBody = document.getElementById('usuariosTable').querySelector('tbody');
         tableBody.innerHTML = ''; 
 
-        data.forEach(user => {
+        data.usuarios.forEach(user => {  
             const row = document.createElement('tr');
 
             const idCell = document.createElement('td');
@@ -83,9 +88,29 @@ function loadUsers() {
             const emailCell = document.createElement('td');
             emailCell.textContent = user.email;
 
+            const cepCell = document.createElement('td');
+            cepCell.textContent = user.cep;
+
+            const logradouroCell = document.createElement('td');
+            logradouroCell.textContent = user.logradouro;
+
+            const bairroCell = document.createElement('td');
+            bairroCell.textContent = user.bairro;
+
+            const cidadeCell = document.createElement('td');
+            cidadeCell.textContent = user.cidade;
+
+            const estadoCell = document.createElement('td');
+            estadoCell.textContent = user.estado;
+
             row.appendChild(idCell);
             row.appendChild(nameCell);
             row.appendChild(emailCell);
+            row.appendChild(cepCell);
+            row.appendChild(logradouroCell);
+            row.appendChild(bairroCell);
+            row.appendChild(cidadeCell);
+            row.appendChild(estadoCell);
 
             tableBody.appendChild(row);
         });
@@ -95,6 +120,7 @@ function loadUsers() {
         alert('Houve um erro ao carregar a lista de usuários.');
     });
 }
+
 
 document.getElementById('nav-users').addEventListener('click', function() {
     hideAllContainers();
@@ -107,8 +133,13 @@ document.getElementById('register-btn').addEventListener('click', function() {
     const nome = document.getElementById('register-name').value.trim();
     const email = document.getElementById('register-email').value.trim();
     const password = document.getElementById('register-password').value.trim();
+    const cep = document.getElementById('register-cep').value.trim();
+    const logradouro = document.getElementById('register-logradouro').value.trim();
+    const bairro = document.getElementById('register-bairro').value.trim();
+    const cidade = document.getElementById('register-cidade').value.trim();
+    const estado = document.getElementById('register-estado').value.trim();
 
-    if (!nome || !email || !password) {
+    if (!nome || !email || !password || !cep || !logradouro || !bairro || !cidade || !estado) {
         alert('Por favor, preencha todos os campos!');
         return;
     }
@@ -121,7 +152,12 @@ document.getElementById('register-btn').addEventListener('click', function() {
         body: JSON.stringify({
             nome: nome,
             email: email,
-            senha: password
+            senha: password,
+            cep: cep,
+            logradouro: logradouro,
+            bairro: bairro,
+            cidade: cidade,
+            estado: estado
         })
     })
     .then(response => {
@@ -140,6 +176,46 @@ document.getElementById('register-btn').addEventListener('click', function() {
         document.getElementById('login-container').style.display = 'block';
     });
 });
+
+
+cepField.addEventListener('blur', function() {
+    const cepValue = cepField.value.replace(/[^0-9]/g, '');  // Remove qualquer caracter não numérico
+
+    if (cepValue.length !== 8) {
+        alert('Por favor, insira um CEP válido.');
+        return;
+    }
+
+    fetch(`https://viacep.com.br/ws/${cepValue}/json/`)
+    .then(response => response.json())
+    .then(data => {
+        if (data.erro) {
+            alert('CEP não encontrado.');
+            return;
+        }
+
+        logradouroField.value = data.logradouro;
+        bairroField.value = data.bairro;
+        cidadeField.value = data.localidade;
+        estadoField.value = data.uf;
+    })
+    .catch(error => {
+        console.error("Erro ao buscar o CEP:", error);
+        alert('Houve um erro ao buscar o CEP. Por favor, tente novamente.');
+    });
+});
+
+function clearRegistrationForm() {
+    document.getElementById('register-name').value = '';
+    document.getElementById('register-email').value = '';
+    document.getElementById('register-password').value = '';
+    document.getElementById('register-cep').value = '';
+    document.getElementById('register-logradouro').value = '';
+    document.getElementById('register-bairro').value = '';
+    document.getElementById('register-cidade').value = '';
+    document.getElementById('register-estado').value = '';
+}
+
 
 function initializeHistoryView() {
     const filterTypeSelect = document.getElementById('filter-type');
@@ -461,6 +537,7 @@ function decodeHTMLEntities(text) {
 document.getElementById('show-register').addEventListener('click', function() {
     document.getElementById('login-container').style.display = 'none';
     document.getElementById('register-container').style.display = 'block';
+    clearRegistrationForm();
 });
 
 document.getElementById('show-login').addEventListener('click', function() {
@@ -503,8 +580,8 @@ document.getElementById('nav-users').addEventListener('click', function() {
     populateUsersTable();
 });
 
-function populateUsersTable(users) {
 
+function populateUsersTable(users) {
     if (!users || !Array.isArray(users)) return;
     const usersTable = document.getElementById('users-table');
     usersTable.innerHTML = '';
@@ -521,6 +598,21 @@ function populateUsersTable(users) {
         const emailCell = document.createElement('td');
         emailCell.textContent = user.email;
 
+        const cepCell = document.createElement('td');
+        cepCell.textContent = user.cep;
+
+        const logradouroCell = document.createElement('td');
+        logradouroCell.textContent = user.logradouro;
+
+        const bairroCell = document.createElement('td');
+        bairroCell.textContent = user.bairro;
+
+        const cidadeCell = document.createElement('td');
+        cidadeCell.textContent = user.cidade;
+
+        const estadoCell = document.createElement('td');
+        estadoCell.textContent = user.estado;
+
         const actionsCell = document.createElement('td');
         const actionsDiv = document.createElement('div');
         actionsDiv.classList.add('actions');
@@ -529,7 +621,6 @@ function populateUsersTable(users) {
         editButton.classList.add('btn', 'btn-warning', 'btn-sm');
         editButton.textContent = 'Editar';
         editButton.addEventListener('click', function() {
-            console.log("Calling editUser with index:", index);  
             editUser(index);
         });
 
@@ -547,11 +638,17 @@ function populateUsersTable(users) {
         row.appendChild(idCell);
         row.appendChild(nameCell);
         row.appendChild(emailCell);
+        row.appendChild(cepCell);
+        row.appendChild(logradouroCell);
+        row.appendChild(bairroCell);
+        row.appendChild(cidadeCell);
+        row.appendChild(estadoCell);
         row.appendChild(actionsCell);
 
         usersTable.appendChild(row);
     });
 }
+
 
 const actionsCell = document.createElement('td');
 const actionsDiv = document.createElement('div');
@@ -647,6 +744,25 @@ function editUser(index) {
     document.getElementById('edit-user-name').value = user.nome;
     document.getElementById('edit-user-email').value = user.email;
     document.getElementById('edit-user-password').value = user.password;
+    if (user.cep) {
+        document.getElementById('edit-user-cep').value = user.cep;
+    } else {
+        document.getElementById('edit-user-cep').value = ''; 
+    }
+    document.getElementById('edit-user-cep').addEventListener('change', function() {
+        fetch(`https://viacep.com.br/ws/${this.value}/json/`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('edit-user-logradouro').value = data.logradouro;
+                document.getElementById('edit-user-bairro').value = data.bairro;
+                document.getElementById('edit-user-cidade').value = data.localidade;
+                document.getElementById('edit-user-estado').value = data.uf;
+            })
+            .catch(error => {
+                console.error("Erro ao buscar o JSON:", error);
+                alert('Houve um erro ao buscar o CEP. Tente novamente.');
+            });
+    });
     document.getElementById('save-changes-btn').removeEventListener('click', saveChangesHandler);
     currentEditingIndex = index;
     document.getElementById('save-changes-btn').addEventListener('click', saveChangesHandler);

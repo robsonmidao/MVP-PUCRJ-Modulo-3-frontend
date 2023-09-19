@@ -193,3 +193,7 @@ button:hover {
     gap: 10px;
     margin-bottom: 20px;
 }
+#users-control-container {
+    width: 1200px; 
+    max-width: 100%; 
+}

@@ -18,15 +18,15 @@
         <center><p>Aplicativo de quiz para treinamento em língua inglesa.</p></center>
         <center><p>Quiz app for English language training.</p></center>
         <div class="form-group">
-            <label for="login-email">Email:</label>
+            <label for="login-email">Email</label>
             <input type="email" id="login-email" class="form-control">
         </div>
         <div class="form-group">
-            <label for="login-password">Password:</label>
+            <label for="login-password">Password</label>
             <input type="password" id="login-password" class="form-control">
         </div>
         <button id="login-btn" class="btn btn-primary">Login</button>
-        <button id="show-register" class="btn btn-secondary">Register</button>
+        <button id="show-register" class="btn btn-secondary">Registrar novo usuário</button>
     </div>
     <nav class="navbar navbar-expand-lg custom-navbar" style="display: none;" id="main-navbar">
         <center><h1>Quiz App</h1></center>
@@ -53,25 +53,51 @@
         <center><h1>Quiz App</h1></center>
         <center><p>Aplicativo de quiz para treinamento em língua inglesa.</p></center>
         <center><p>Quiz app for English language training.</p></center>
-        <h2>Register</h2>
+        <h3><center>Registrar novo usuário</center></h3>
         <div class="form-group">
-            <label for="register-name">Nome:</label>
+            <label for="register-name">Nome</label>
             <input type="text" id="register-name" class="form-control">
         </div>
-        <div class="form-group">
-            <label for="register-email">Email:</label>
-            <input type="email" id="register-email" class="form-control">
+        <div class="form-row"> 
+            <div class="form-group col-md-6">
+                <label for="register-email">Email</label>
+                <input type="email" id="register-email" class="form-control">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="register-password">Password</label>
+                <input type="password" id="register-password" class="form-control">
+            </div>
+        </div>
+        <div class="form-row"> 
+            <div class="form-group col-md-4">
+                <label for="register-cep">CEP</label>
+                <input type="text" id="register-cep" class="form-control">
+            </div>
+            
+            <div class="form-group col-md-8">
+                <label for="register-logradouro">Logradouro</label>
+                <input type="text" id="register-logradouro" class="form-control">
+            </div>
         </div>
         <div class="form-group">
-            <label for="register-password">Password:</label>
-            <input type="password" id="register-password" class="form-control">
+            <label for="register-bairro">Bairro</label>
+            <input type="text" id="register-bairro" class="form-control">
         </div>
-        <button id="register-btn" class="btn btn-primary">Register</button>
-        <button id="show-login" class="btn btn-secondary">Back to Login</button>
-    </div>
-
-
     
+        <div class="form-row"> 
+            <div class="form-group col-md-8"> 
+                <label for="register-cidade">Cidade</label>
+                <input type="text" id="register-cidade" class="form-control">
+            </div>
+    
+            <div class="form-group col-md-4"> 
+                <label for="register-estado">Estado</label>
+                <input type="text" id="register-estado" class="form-control">
+            </div>
+        </div>
+        <button id="register-btn" class="btn btn-primary">Salvar</button>
+        <button id="show-login" class="btn btn-secondary">Voltar para Login</button>
+    </div>    
     <div id="start-quiz-container" class="centered" style="display: none;">
         <h3>Welcome, <span id="user-name"></span><span id="user-id" style="display:none"></span></h3>
         <div class="form-group">
@@ -105,7 +131,7 @@
             </select>
         </div>
         <div class="form-group">
-            <label for="num_questions">Number of Questions:</label>
+            <label for="num_questions">Number of Questions</label>
             <input type="number" name="num_questions" class="form-control" value="5" min="1" max="50">
         </div>
         <div id="error-message" style="color: red;"></div>
@@ -153,13 +179,18 @@
                     <th scope="col">#</th>
                     <th scope="col">Nome</th>
                     <th scope="col" class="email-column">Email</th>
+                    <th scope="col">CEP</th>
+                    <th scope="col">Logradouro</th>
+                    <th scope="col">Bairro</th>
+                    <th scope="col">Cidade</th>
+                    <th scope="col">Estado</th>
                     <th scope="col" class="acoes-column">Ações</th>
                 </tr>
             </thead>
             <tbody id="users-table">
                 <!-- O JavaScript irá popular essa tabela -->
             </tbody>
-        </table>
+        </table>        
     
         <!-- Modal para edição de usuário -->
         <div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">
@@ -173,16 +204,41 @@
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="edit-user-name">Nome:</label>
+                            <label for="edit-user-name">Nome</label>
                             <input type="text" id="edit-user-name" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label for="edit-user-email">Email:</label>
+                            <label for="edit-user-email">Email</label>
                             <input type="email" id="edit-user-email" class="form-control" disabled>
                         </div>
                         <div class="form-group">
-                            <label for="edit-user-password">Password:</label>
+                            <label for="edit-user-password">Password</label>
                             <input type="password" id="edit-user-password" class="form-control">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="edit-user-cep">CEP</label>
+                                <input type="text" id="edit-user-cep" class="form-control">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="edit-user-bairro">Bairro</label>
+                                <input type="text" id="edit-user-bairro" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-user-logradouro">Logradouro</label>
+                            <input type="text" id="edit-user-logradouro" class="form-control">
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="edit-user-cidade">Cidade</label>
+                                <input type="text" id="edit-user-cidade" class="form-control">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="edit-user-estado">Estado</label>
+                                <input type="text" id="edit-user-estado" class="form-control">
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
