@@ -183,7 +183,16 @@ button:hover {
     padding: 5px 10px; 
 }
 .email-column {
-    width: 40%; 
+    width: 20%; 
+}
+.logradouro-column {
+    width: 20%; 
+}
+.cep-column {
+    width: 10%; 
+}
+.nome-column {
+    width: 30%; 
 }
 .acoes-column {
     width: 100px; 

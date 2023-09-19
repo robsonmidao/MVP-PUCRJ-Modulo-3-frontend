@@ -107,7 +107,7 @@
         <button id="show-login" class="btn btn-secondary">Voltar para Login</button>
     </div>    
     <div id="start-quiz-container" class="centered" style="display: none;">
-        <h3>Welcome, <span id="user-name"></span><span id="user-id" style="display:none"></span></h3>
+        <center><h3>Welcome, <span id="user-name"></span><span id="user-id" style="display:none"></span></h3></center>
         <div class="form-group">
             <label for="trivia_category">Choose a category:</label>
             <select name="trivia_category" class="form-control">
@@ -179,16 +179,16 @@
         </div>
     </div>
     <div id="users-control-container" class="centered" style="display: none;">
-        <h3>Controle de Usuários</h3>
+        <center><h3>Controle de Usuários</h3></center>
     
         <table class="table table-dark" id="usuariosTable">
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Nome</th>
+                    <th scope="col" class="nome-column">Nome</th>
                     <th scope="col" class="email-column">Email</th>
-                    <th scope="col">CEP</th>
-                    <th scope="col">Logradouro</th>
+                    <th scope="col" class="cep-column">CEP</th>
+                    <th scope="col" class="logradouro-column">Logradouro</th>
                     <th scope="col">Bairro</th>
                     <th scope="col">Cidade</th>
                     <th scope="col">Estado</th>
@@ -258,7 +258,7 @@
         </div>
     </div>
     <div id="history-container" class="centered" style="display: none;">
-        <h3>Histórico</h3>
+        <center><h3>Histórico</h3></center>
         <div class="filter-options">
             <select id="filter-type" class="form-control">
                 <option value="user">Por Usuário</option>

@@ -281,16 +281,9 @@ startQuizBtn.addEventListener('click', function() {
 });
 
 document.getElementById("nav-quote-of-day").addEventListener("click", function() {
-    // Esconda todas as outras seções (você precisa adicionar IDs ou classes conforme necessário em seus containers)
-    const containers = ["login-container", "register-container", "start-quiz-container", "users-control-container", "history-container", "quote-container"];
-    containers.forEach(id => {
-        document.getElementById(id).style.display = 'none';
-    });
-    
-    // Mostre a seção de Quote of the Day
+    hideAllContainers();    
     document.getElementById("quote-container").style.display = 'block';
 
-    // Faça uma requisição para obter a citação
     fetch('https://www.boredapi.com/api/activity/')
     .then(response => response.json())
     .then(data => {
@@ -769,6 +762,10 @@ function editUser(index) {
     document.getElementById('edit-user-name').value = user.nome;
     document.getElementById('edit-user-email').value = user.email;
     document.getElementById('edit-user-password').value = user.password;
+    document.getElementById('edit-user-logradouro').value = user.logradouro;
+    document.getElementById('edit-user-bairro').value = user.bairro;
+    document.getElementById('edit-user-cidade').value = user.cidade;
+    document.getElementById('edit-user-estado').value = user.estado;
     if (user.cep) {
         document.getElementById('edit-user-cep').value = user.cep;
     } else {
