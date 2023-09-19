@@ -280,6 +280,28 @@ startQuizBtn.addEventListener('click', function() {
         .catch(error => console.error("Erro ao buscar o JSON:", error));
 });
 
+document.getElementById("nav-quote-of-day").addEventListener("click", function() {
+    // Esconda todas as outras seções (você precisa adicionar IDs ou classes conforme necessário em seus containers)
+    const containers = ["login-container", "register-container", "start-quiz-container", "users-control-container", "history-container", "quote-container"];
+    containers.forEach(id => {
+        document.getElementById(id).style.display = 'none';
+    });
+    
+    // Mostre a seção de Quote of the Day
+    document.getElementById("quote-container").style.display = 'block';
+
+    // Faça uma requisição para obter a citação
+    fetch('https://www.boredapi.com/api/activity/')
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById("daily-quote").textContent = data.activity;
+    })
+    .catch(error => {
+        console.error('Erro ao buscar a citação:', error);
+        document.getElementById("daily-quote").textContent = "Erro ao buscar a citação. Por favor, tente novamente mais tarde.";
+    });
+});
+
 function displayQuestion(index) {
     const question = questions[index];
     questionTitleElement.textContent = decodeHTMLEntities(question.question);
@@ -568,12 +590,15 @@ function hideAllContainers() {
     document.getElementById('register-container').style.display = 'none';
     document.getElementById('users-control-container').style.display = 'none';
     document.getElementById('history-container').style.display = 'none'; 
+    document.getElementById('quote-container').style.display = 'none'; 
     document.querySelector('.quiz-container').style.display = 'none';
+    
 }
 
 document.getElementById('nav-users').addEventListener('click', function() {
     document.getElementById('login-container').style.display = 'none';
     document.getElementById('register-container').style.display = 'none';
+    document.getElementById('quote-container').style.display = 'none';
     document.querySelector('.quiz-container').style.display = 'none';
     startQuizContainer.style.display = 'none';
     document.getElementById('users-control-container').style.display = 'block';

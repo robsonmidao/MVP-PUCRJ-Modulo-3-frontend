@@ -45,3 +45,13 @@ VIACEP é um webservice gratuito e de alto desempenho para consultar Códigos de
 
 # Rotas Utilizadas: 
 https://viacep.com.br/ws/${cepValue}/json/
+
+
+# API Externa #3: 
+https://www.boredapi.com/
+
+# Descrição: API de CEP:
+The Bored API Let's find you something to do - API para retornar frases em inglês sobre encontrar coisas para se fazer. O uso desta API não requer uma chave de API.
+
+# Rotas Utilizadas: 
+https://www.boredapi.com/api/activity/
