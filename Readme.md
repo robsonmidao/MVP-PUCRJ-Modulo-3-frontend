@@ -33,7 +33,7 @@ O Open Trivia Database fornece uma API JSON totalmente gratuita para uso em proj
 Todos os dados fornecidos pela API estão disponíveis sob a Licença Internacional Creative Commons Attribution-ShareAlike 4.0
 
 # Rotas Utilizadas: 
-https://opentdb.com/api.php?amount=${amount}&category=${category}
+https://opentdb.com/api.php?amount=10&category=31
 
 
 
@@ -44,7 +44,7 @@ https://viacep.com.br/
 VIACEP é um webservice gratuito e de alto desempenho para consultar Códigos de Endereçamento Postal (CEP) do Brasil. O uso desta API não requer uma chave de API.
 
 # Rotas Utilizadas: 
-https://viacep.com.br/ws/${cepValue}/json/
+https://viacep.com.br/ws/27910-210/json/
 
 
 # API Externa #3: 
